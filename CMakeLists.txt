@@ -6,6 +6,7 @@ project(gz-sim-yarp-plugins
 
 find_package(YARP REQUIRED COMPONENTS robotinterface os)
 find_package(YCM REQUIRED)
+find_package(ICUB QUIET)
 
 # Initial value of GZ_SIM_YARP_PLUGINS_USED_GZ_SIM_VERSION is empty, and then is set to 8 or 9 depending if gz-sim8 or gz-sim9 are available
 set(GZ_SIM_YARP_PLUGINS_USED_GZ_SIM_VERSION_DOCS "Version of gz-sim used to compile gz-sim-yarp-plugins (either 8 or 9)")
