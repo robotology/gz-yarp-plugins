@@ -71,7 +71,7 @@
       <yarpPluginConfigurationOverride yarpDeviceName='controlboard_plugin_device'/>
 
       <!-- If you want to override the initialConfiguration xml element, set it -->
-      <initialConfiguration>1.57079632679</initialConfiguration>
+      <initialConfiguration>0.785398</initialConfiguration>
     </plugin>
 
     <include>

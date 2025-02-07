@@ -37,8 +37,8 @@ The relevant snippet is:
       <yarpPluginConfigurationOverride yarpDeviceName='controlboard_plugin_device'/>
 
       <!-- If you want to override the initialConfiguration xml element, set it -->
-      <initialConfiguration>1.57079632679</initialConfiguration>
+      <initialConfiguration>0.785398</initialConfiguration>
     </plugin>
 ```
 
-The original `initialConfiguration` of the `controlboard_plugin_device` was `0.0`, while via the `gzyarp::ConfigurationOverride` plugin we override its value to be `1.57079632679` rad (i.e. 90 degrees).
+The original `initialConfiguration` of the `controlboard_plugin_device` was `0.0`, while via the `gzyarp::ConfigurationOverride` plugin we override its value to be `0.785398` rad (i.e. 45 degrees).

@@ -127,7 +127,7 @@ In `gazebo-yarp-plugins` with Gazebo Classic, the `libgazebo_yarp_configurationo
 ~~~xml
     <plugin name='configuration_override' filename='libgazebo_yarp_configurationoverride.so'>
       <yarpPluginConfigurationOverride plugin_name='controlboard_plugin'/>
-      <initialConfiguration>1.57079632679</initialConfiguration>
+      <initialConfiguration>0.785398</initialConfiguration>
     </plugin>
     <include>
       <uri>model://single_pendulum/model.sdf</uri>
@@ -144,7 +144,7 @@ the equivalent syntax with `gz-sim-yarp-plugins` is:
       <yarpPluginConfigurationOverride yarpDeviceName='controlboard_plugin_device'/>
 
       <!-- If you want to override the initialConfiguration xml element, set it -->
-      <initialConfiguration>1.57079632679</initialConfiguration>
+      <initialConfiguration>0.785398</initialConfiguration>
     </plugin>
 
     <include>
