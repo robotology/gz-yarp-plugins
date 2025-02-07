@@ -109,6 +109,23 @@ public:
      */
     void incrementNrOfGzSimYARPPluginsNotSuccessfullyLoaded(const gz::sim::EntityComponentManager& ecm);
 
+    /**
+     * Add a configuration override for a given yarp device.
+     *
+     */
+    bool addConfigurationOverrideForYARPDevice(const gz::sim::EntityComponentManager& ecm,
+                                               const std::string& modelScopedNameWhereConfigurationOverrideWasInserted,
+                                               const std::string& yarpDeviceName,
+                                               std::unordered_map<std::string, std::string> overridenParameters);
+    /**
+     * Get the configuration override for a given yarp device.
+     *
+     */
+    bool getConfigurationOverrideForYARPDevice(const gz::sim::EntityComponentManager& ecm,
+                                               const std::string& modelScopedNameWhereYARPDeviceWasInserted,
+                                               const std::string& yarpDeviceName,
+                                               std::unordered_map<std::string, std::string>& overridenParameters) const;
+
 private:
     /**
      * Generate a unique device id for a given yarp device name and entity.
@@ -152,6 +169,30 @@ private:
 
     // Number of gz-sim-yarp-plugins YARP devices not loaded correctly for a given ecm
     std::unordered_map<std::string, std::size_t> m_nrOfGzSimYARPPluginsNotSuccessfullyLoaded;
+
+
+    // Element that stores the parameters that will be overriden for a given yarp device
+    // A device will be affected by the override if:
+    // - gzInstanceId match
+    // - yarpDeviceName match
+    // - the modelScopedNameWhereConfigurationOverrideWasInserted is a prefix of the model scoped name of the device`
+    struct ConfigurationOverrideParameters {
+        // Id that identifies the gz instance where the configuration override plugin was inserted
+        std::string gzInstanceId;
+        // Scoped name of the model where the condiguration override plugin was inserted,
+        // used to understand if a given yarp device is affected by the override
+        std::string modelScopedNameWhereConfigurationOverrideWasInserted;
+        // yarpDeviceName of the yarp device that will have its parameters overriden
+        std::string yarpDeviceName;
+        // Map of the parameters that will be overriden
+        // Some keys have a special meaning:
+        // gzyarp-xml-element-initialConfiguration: override the content of a <initialConfiguration> tag
+        std::unordered_map<std::string, std::string> overridenParameters;
+    };
+
+    // This is a list of parameters specified by the configuration override plugin,
+    // they specify the parameters that will be overriden for a given yarp device
+    std::vector<ConfigurationOverrideParameters> m_yarpDevicesOverridenParametersList;
 };
 
 } // namespace gzyarp

@@ -347,4 +347,40 @@ void DeviceRegistry::incrementNrOfGzSimYARPPluginsNotSuccessfullyLoaded(const gz
     }
 }
 
+bool DeviceRegistry::addConfigurationOverrideForYARPDevice(const gz::sim::EntityComponentManager& ecm,
+                                           const std::string& modelScopedNameWhereConfigurationOverrideWasInserted,
+                                           const std::string& yarpDeviceName,
+                                           std::unordered_map<std::string, std::string> overridenParameters)
+{
+    m_yarpDevicesOverridenParametersList.push_back({getGzInstanceId(ecm),
+                                                    modelScopedNameWhereConfigurationOverrideWasInserted,
+                                                    yarpDeviceName,
+                                                    overridenParameters});
+    return true;
+}
+
+bool DeviceRegistry::getConfigurationOverrideForYARPDevice(const gz::sim::EntityComponentManager& ecm,
+                                           const std::string& modelScopedNameWhereYARPDeviceWasInserted,
+                                           const std::string& yarpDeviceName,
+                                           std::unordered_map<std::string, std::string>& overridenParameters) const
+{
+    overridenParameters.clear();
+    // We go through all the overriden parameters and add to the returned overridenParameters all the matchin
+    // elements of the list. Note that earlier elements in the list have higher priority, to provide the possibility
+    // of overriding a parameter that was already overriden in a nested configuration override.
+    // Note that the condition for the overriden to be consider (beside matching gzInstanceId and yarpDeviceName)
+    // is that the model scoped name of the place where the configuration override was inserted is a prefix of the
+    // model scoped name of the device, to ensure that the override is applied only to the devices that are descendent
+    // of the model where the configuration override was inserted
+    for (auto&& params : m_yarpDevicesOverridenParametersList) {
+        if (params.gzInstanceId == getGzInstanceId(ecm) &&
+            modelScopedNameWhereYARPDeviceWasInserted.rfind(params.modelScopedNameWhereConfigurationOverrideWasInserted) &&
+            params.yarpDeviceName == yarpDeviceName) {
+            std::unordered_map<std::string, std::string> consideredOverridenParameters = params.overridenParameters;
+            overridenParameters.merge(consideredOverridenParameters);
+            return true;
+        }
+    }
+    return false;
+}
 } // namespace gzyarp

@@ -96,6 +96,8 @@
             <yarpConfigurationFile>
                 model://single_pendulum/conf/gazebo_controlboard.ini
             </yarpConfigurationFile>
+            <!-- This initialConfiguration is specified here, but it is overriden in single_pendulum_world
+                 to show how to spawn the model in a different configuration from the default one of the model -->
             <initialConfiguration>0.0</initialConfiguration>
         </plugin>
         <plugin name="gzyarp::RobotInterface" filename="gz-sim-yarp-robotinterface-system">

@@ -34,7 +34,20 @@ If you want to build `gz-sim-yarp-plugins` directly from source, you can check t
 
 ## Usage
 
-Once the plugins are available, you can see how to use the different plugins by looking in the directories contained in the [tutorial](tutorial/) folder of this repo. Each directory is an example, and contains a README that shows how to run that example.
+The plugins available in the repo are listed in the following.
+
+|  `name` |  `filename` |   Documentation | Example |
+|:-------------:|:-----------------:|:---------------------:|:---------------:|
+| `gzyarp::ControlBoard` | `gz-sim-yarp-controlboard-system` | [Missing. If you need it please open an issue.](https://github.com/robotology/gz-sim-yarp-plugins/issues/new)  | [`tutorial/single_pendulum`](./tutorial/single_pendulum) |
+| `gzyarp::ConfigurationOverride` | `gz-sim-yarp-configurationoverride-system` |  [`configurationoverride/README.md`](./configurationoverride/README.md) | [`tutorial/single_pendulum`](./tutorial/single_pendulum) |
+| `gzyarp::ForceTorque` | `gz-sim-yarp-forcetorque-system` | [Missing. If you need it please open an issue.](https://github.com/robotology/gz-sim-yarp-plugins/issues/new)  | [`tutorial/forcetorque`](./tutorial/forcetorque) |
+| `gzyarp::Imu` | `gz-sim-yarp-imu-system` | [Missing. If you need it please open an issue.](https://github.com/robotology/gz-sim-yarp-plugins/issues/new)  | [`tutorial/forcetorque`](./tutorial/imu) |
+| `gzyarp::Camera` | `gz-sim-yarp-camera-system` | [Missing. If you need it please open an issue.](https://github.com/robotology/gz-sim-yarp-plugins/issues/new)  | [`tutorial/camera`](./tutorial/imu) |
+| `gzyarp::BaseState` | `gz-sim-yarp-basestate-system` | [Missing. If you need it please open an issue.](https://github.com/robotology/gz-sim-yarp-plugins/issues/new)  | [`tutorial/basestate`](./tutorial/basestate) |
+| `gzyarp::RobotInterface` | `gz-sim-yarp-robotinterface-system` | [Missing. If you need it please open an issue.](https://github.com/robotology/gz-sim-yarp-plugins/issues/new)  | All tutorials in [`tutorial`](./tutorial) make use of the `gzyarp::RobotInterface` plugin. |
+| `gzyarp::Clock` | `gz-sim-yarp-clock-system` | [Missing. If you need it please open an issue.](https://github.com/robotology/gz-sim-yarp-plugins/issues/new)  | [`tutorial/clock`](./tutorial/clock) |
+
+You can see how to use the different plugins by looking in the directories contained in the [tutorial](tutorial/) folder of this repo. Each directory is an example, and contains a README that shows how to run that example.
 
 ### Migrating from Gazebo Classic and `gazebo-yarp-plugins`
 
@@ -61,7 +74,7 @@ For example, the configuration file for an IMU plugin can be specified as:
 </plugin>
 ```
 
-This means that the `imu.ini` file location is relative to the `ergoCub` model path, that is automatically found by Gazebo through the `GZ_SIM_SYSTEM_PLUGIN_PATH` environment variable:
+This means that the `imu.ini` file location is relative to the `ergoCub` model path, that is automatically found by Gazebo through the `GZ_SIM_RESOURCE_PATH` environment variable:
 
 ```
 models

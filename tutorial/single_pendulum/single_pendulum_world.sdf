@@ -64,6 +64,16 @@
       </link>
     </model>
 
+    <!-- This is an example of how to override the initial configuration -->
+    <plugin name='gzyarp::ConfigurationOverride' filename='gz-sim-yarp-configurationoverride-system'>
+      <!-- The yarpPluginConfigurationOverride device is used to override the configuration of
+           a given yarp device, whose name is specified via the yarpDeviceName attribute -->
+      <yarpPluginConfigurationOverride yarpDeviceName='controlboard_plugin_device'/>
+
+      <!-- If you want to override the initialConfiguration xml element, set it -->
+      <initialConfiguration>0.785398</initialConfiguration>
+    </plugin>
+
     <include>
       <uri>model://single_pendulum/model.sdf</uri>
     </include>

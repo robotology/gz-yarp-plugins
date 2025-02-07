@@ -117,12 +117,21 @@ void ControlBoard::Configure(const Entity& _entity,
 
     m_pluginParameters.put("device", "gazebo_controlboard");
 
+    // First check if there is the initialConfiguration element
     if (_sdf->HasElement("initialConfiguration"))
     {
         std::string initialConfiguration = _sdf->Get<std::string>("initialConfiguration");
-        yDebug() << "gz-sim-yarp-controlboard-system: initialConfiguration: "
-                 << initialConfiguration;
         m_pluginParameters.put("initialConfiguration", initialConfiguration);
+    }
+
+    // Then check if there is any override for the initialConfiguration element
+    std::unordered_map<std::string, std::string> overridenParameters;
+    DeviceRegistry::getHandler()->getConfigurationOverrideForYARPDevice(
+        _ecm, m_robotScopedName, yarpDeviceName, overridenParameters);
+    if (overridenParameters.find("gzyarp-xml-element-initialConfiguration") != overridenParameters.end())
+    {
+        m_pluginParameters.put("initialConfiguration",
+                               overridenParameters["gzyarp-xml-element-initialConfiguration"]);
     }
 
     if (!m_controlBoardDriver.open(m_pluginParameters))
